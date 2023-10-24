@@ -3,7 +3,7 @@ import { ComponentProps, ReactNode, useEffect, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 import { Container, InputStyle, Select, SelectButton, Option, ContentOption } from "./styles";
-import { Input } from "../Input";
+
 
 interface ButtonProps extends ComponentProps<'input'> {
   icon?: ReactNode;
@@ -27,15 +27,9 @@ export function InputPhone({ icon, ...props }: ButtonProps) {
   const [openSelect, setOpenSelect] = useState(false);
   const [itemSeleted, setItemSeleted] = useState("1");
 
-  useEffect(() => {
-    console.log(itemSeleted);
-    console.log(openSelect)
-  }, [itemSeleted])
-
   function handleGetPhoneCode(e: any) {
-    setOpenSelect(false)
+    setOpenSelect(false);
     setItemSeleted(e.target.value);
-    console.log(openSelect)
   }
 
   return (
@@ -66,8 +60,7 @@ export function InputPhone({ icon, ...props }: ButtonProps) {
       </Container>
 
       <Option openSelect={openSelect}>
-        <input type="text" placeholder="Pesquisar code number" />
-        <ContentOption style={{ position: "absolute", width: "100%" }}>
+        <ContentOption>
           {teste.map(i => {
             return (
               <li key={i.id} id="option">
@@ -79,7 +72,7 @@ export function InputPhone({ icon, ...props }: ButtonProps) {
                 />
 
                 <i>Bandeira</i>
-                <p>{i.name} (+ {i.phone_code})</p>
+                <label>{i.name} (+ {i.phone_code})</label>
               </li>
             )
           })}

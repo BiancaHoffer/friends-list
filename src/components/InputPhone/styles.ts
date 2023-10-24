@@ -27,7 +27,6 @@ export const Container = styled.div`
 `;
 
 export const InputStyle = styled.input`
-  //width: 100%;
   background-color: transparent;
   color: ${props => props.theme["gray400"]};
   border: none;
@@ -88,15 +87,21 @@ export const ContentOption = styled.div`
   #option {
     position: relative;
     display: flex;
-
     align-items: center;
     gap: 12px;
+
+    z-index: 20;
+
     background-color: ${props => props.theme["gray900"]};
-    margin-top: 8px;
     width: 100%;
-    padding: 20px;
+    padding: 12px;
     border-radius: 4px;
     border: 1px solid transparent;
+
+    label {
+      margin-top: 0;
+      color: ${props => props.theme["gray400"]};
+    }
 
     &:hover {
       background-color: ${props => props.theme["gray800"]};
@@ -110,9 +115,4 @@ export const ContentOption = styled.div`
     inset: 0;
     cursor: pointer;
   }
-
-  p {
-      margin: 0;
-      color: ${props => props.theme["gray400"]};
-    }
 `

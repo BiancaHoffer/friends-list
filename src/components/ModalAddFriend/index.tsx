@@ -7,6 +7,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import { Input } from "../Input";
 import { Button } from "../Button";
 import { InputPhone } from "../InputPhone";
+import { InputSelect } from "../InputSelected";
 
 interface ModalAddFriendProps {
   open: boolean;
@@ -74,8 +75,8 @@ export function ModalAddFriend({ open, setOpen }: ModalAddFriendProps) {
             Localização
           </p>
           <div>
-            <Input />
-            <Input />
+            <InputSelect title="país" />
+            <InputSelect title="sitio" />
           </div>
 
           <span>
