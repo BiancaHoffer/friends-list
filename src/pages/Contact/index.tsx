@@ -1,3 +1,5 @@
+import { Link, useRoutes } from "react-router-dom";
+
 import { ContentHeader, Header, Avatar } from "./styles";
 
 import { IoIosArrowBack } from "react-icons/io";
@@ -10,15 +12,15 @@ export function Contact() {
       <Header>
         <ContentHeader>
           <div>
-            <button>
+            <Link to="/">
               <IoIosArrowBack />
               Voltar
-            </button>
+            </Link>
 
-            <button>
+            <Link to="/">
               <IoCreateOutline />
               Editar
-            </button>
+            </Link>
           </div>
 
           <div>

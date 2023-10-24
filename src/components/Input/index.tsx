@@ -15,7 +15,7 @@ export function Input({ icon, ...props }: ButtonProps) {
         </Icon>
       }
 
-      <InputStyle {...props} />
+      <InputStyle {...props} icon={icon} />
     </Container>
   )
 }

@@ -16,7 +16,7 @@ export const ContentHeader = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    > button {
+    > a, button {
       background-color: transparent;
       border: none;
       color: ${props => props.theme["white"]};

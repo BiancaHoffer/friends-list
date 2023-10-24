@@ -12,7 +12,20 @@ export const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme["white"]};
   }
 
-  body, input, textarea, button {
+  
+  body::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background:  ${props => props.theme["gray900"]};    
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background-color:  ${props => props.theme["gray500"]};
+    }
+
+    body, input, textarea, button {
         font-family: 'Roboto', sans-serif;
         font-weight: 400;
         font-size: 1rem;
@@ -23,6 +36,11 @@ export const GlobalStyle = createGlobalStyle`
       border: 0 none;
       outline: 0;
     } 
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
 
     button {
       cursor: pointer;

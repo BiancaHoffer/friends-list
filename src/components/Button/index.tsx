@@ -10,13 +10,15 @@ interface ButtonProps extends ComponentProps<'button'> {
 export function Button({ icon, title, ...props }: ButtonProps) {
   return (
     <Container>
-      {icon &&
-        <Icon>
-          {icon}
-        </Icon>
-      }
+
 
       <ButtonStyle {...props}>
+        {icon &&
+          <Icon>
+            {icon}
+          </Icon>
+        }
+
         {title}
       </ButtonStyle>
     </Container>

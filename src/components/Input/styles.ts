@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface props {
+  icon: React.ReactNode;
+}
+
 export const Container = styled.div`
   display: flex;
   gap: 4px;
@@ -22,13 +26,13 @@ export const Container = styled.div`
   }
 `;
 
-export const InputStyle = styled.input`
+export const InputStyle = styled.input<props>`
   width: 100%;
   background-color: transparent;
   color: ${props => props.theme["gray400"]};
   border: none;
   border-radius: 0px 16px 16px 0px;
-  padding: 14px 20px 14px 0px;
+  padding: ${props => props.icon ? "20px 16px 20px 0px" : "16px 20px"} ;
 `;
 
 export const Icon = styled.div`
@@ -36,6 +40,6 @@ export const Icon = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 26px;
-  width: 6%;
+  width: 5%;
   margin: 0px 8px;
 `
