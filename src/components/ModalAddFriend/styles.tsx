@@ -6,7 +6,6 @@ interface props {
 
 export const Container = styled.button<props>`
   position: fixed;
-  //z-index: 10;
   top:0;
 
   border: none;
@@ -28,7 +27,7 @@ export const ContainerModal = styled.div`
   margin: 12px;
   cursor: auto;
 
-  z-index: 999;
+  z-index: 10;
 
   & > div:nth-child(1) {
     display: flex;
@@ -73,6 +72,10 @@ export const ContainerModal = styled.div`
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 16px;
+
+        @media(max-width: 768px) {
+         grid-template-columns: 1fr;
+        }
       }
 
       & > span {
