@@ -109,15 +109,6 @@ export function Home() {
 
   return (
     <>
-      <div>
-        {
-          getlist?.map((i: any) => {
-            return (
-              <div key={i.node.iso2}>{i.node.name}</div>
-            )
-          })
-        }
-      </div>
       <Header>
         <ContentHeader>
           <div>
