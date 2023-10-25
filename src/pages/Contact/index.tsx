@@ -1,4 +1,4 @@
-import { Link, useLocation, useParams, useRoutes } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react"
 
 import { ContentHeader, Header, Avatar } from "./styles";
@@ -45,7 +45,11 @@ export function Contact() {
 
       <CardSingleFriend data={state} />
 
-      <ModalUpdateFriend open={openModal} setOpen={setOpenModal} />
+      <ModalUpdateFriend
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        data={state}
+      />
     </>
   )
 }

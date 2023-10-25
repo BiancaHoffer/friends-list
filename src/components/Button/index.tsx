@@ -5,14 +5,13 @@ import { Container, ButtonStyle, Icon } from "./styles";
 interface ButtonProps extends ComponentProps<'button'> {
   icon?: ReactNode;
   title: string;
+  variant?: "yellow" | "red" | "gray";
 }
 
-export function Button({ icon, title, ...props }: ButtonProps) {
+export function Button({ icon, title, variant = "yellow", ...props }: ButtonProps) {
   return (
     <Container>
-
-
-      <ButtonStyle {...props}>
+      <ButtonStyle variant={variant} {...props}>
         {icon &&
           <Icon>
             {icon}

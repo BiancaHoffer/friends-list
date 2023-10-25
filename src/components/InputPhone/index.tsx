@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode, useEffect, useState } from "react";
+import { ComponentProps, ReactNode, useState } from "react";
 
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 

@@ -4,7 +4,7 @@ interface props {
   closeModal?: boolean;
 }
 
-export const Container = styled.button<props>`
+export const Container = styled.div<props>`
   position: fixed;
   top:0;
 

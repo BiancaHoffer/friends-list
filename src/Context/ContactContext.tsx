@@ -13,6 +13,7 @@ interface AuthProviderProps {
 interface AuthContextProps {
   addContact: (data: DataContact) => void;
   removeContact: (id: string) => void;
+  updateContact: (data: DataContact) => void;
   listContacts: DataContact[];
 }
 
@@ -42,26 +43,22 @@ export function ContactProvider({ children }: AuthProviderProps) {
 
   function addContact(data: DataContact) {
     setListContacts((prevList) => [...prevList, data]);
+  };
 
-    localStorage.setItem("@biancamacedo", JSON.stringify(listContacts))
+  function updateContact(data: DataContact) {
+    setListContacts((prevList) => prevList.filter((contact) => contact.id !== data.id));
+    setListContacts((prevList) => [...prevList, data]);
   };
 
   function removeContact(id: string) {
     setListContacts((prevList) => prevList.filter((contact) => contact.id !== id));
-
-    //localStorage.setItem("@biancamacedo", JSON.stringify(listContacts))
-  };
-
-  function updateContact(data: DataContact) {
-    //setListContacts((prevList) => [...prevList, data]);
-
-    localStorage.setItem("@biancamacedo", JSON.stringify(listContacts))
   };
 
   return (
     <ContactContext.Provider value={{
       addContact,
       listContacts,
+      updateContact,
       removeContact
     }}>
       {children}

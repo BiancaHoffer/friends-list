@@ -1,4 +1,4 @@
-import { MouseEvent, useState, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 
 import { Container, ContainerModal } from "./styles";
 
@@ -7,15 +7,11 @@ import { IoCloseOutline } from "react-icons/io5";
 import { Input } from "../Input";
 import { Button } from "../Button";
 import { InputPhone } from "../InputPhone";
-import { InputSelect } from "../InputSelected";
-import { InputSelectCities } from "../InputSelectedCities";
 import { useCreateContact } from "../../Context/ContactContext";
 
 interface ModalAddFriendProps {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  contries?: any[];
-  cities?: any[];
+  openModal: boolean;
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface DataContact {
@@ -24,7 +20,7 @@ interface DataContact {
   phone: string;
 }
 
-export function ModalAddFriend({ open, setOpen, contries, cities }: ModalAddFriendProps) {
+export function ModalAddFriend({ openModal, setOpenModal }: ModalAddFriendProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -33,6 +29,11 @@ export function ModalAddFriend({ open, setOpen, contries, cities }: ModalAddFrie
 
   function handleAddContact(event: FormEvent) {
     event.preventDefault();
+
+    if (name === "" || email === "" || phone === "") {
+      alert("Por favor, preencha os campos obrigatórios");
+      return;
+    }
 
     const UIDProductGenerate = Math.floor(Date.now() * Math.random()).toString(32);
 
@@ -44,18 +45,18 @@ export function ModalAddFriend({ open, setOpen, contries, cities }: ModalAddFrie
     } as DataContact;
 
     addContact(data);
-    console.log(data)
+    setOpenModal(false);
   };
 
   return (
     <Container
-      closeModal={open}
+      closeModal={openModal}
     >
       <ContainerModal>
         <div>
           <p>Adicionar amigo</p>
           <button
-            onClick={() => setOpen(false)}
+            onClick={() => setOpenModal(false)}
             type="button"
           >
             <IoCloseOutline />
@@ -82,8 +83,7 @@ export function ModalAddFriend({ open, setOpen, contries, cities }: ModalAddFrie
             Localização
           </p>
           <div>
-            <InputSelect title="país" data={contries} />
-            <InputSelectCities title="sitio" data={cities} />
+
           </div>
 
           <span>
@@ -92,8 +92,10 @@ export function ModalAddFriend({ open, setOpen, contries, cities }: ModalAddFrie
               type="submit"
             />
             <Button
+              onClick={() => setOpenModal(false)}
               title="Cancelar"
               type="button"
+              variant="gray"
             />
           </span>
         </form>

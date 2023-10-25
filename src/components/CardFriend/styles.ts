@@ -6,6 +6,8 @@ export const Container = styled.div`
   max-width: 900px;
   padding: 40px;
   margin: auto;
+  margin-top: 16px;
+
   border:1px solid transparent;
   cursor: pointer;
 

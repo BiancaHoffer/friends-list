@@ -8,7 +8,6 @@ import { ContentHeader, Header } from "./styles";
 import { IoIosAdd, IoIosSearch } from "react-icons/io";
 import { ModalAddFriend } from "../../components/ModalAddFriend";
 
-import { useQuery } from '@apollo/client';
 import { gql } from 'graphql-tag';
 import { DataContact, useCreateContact } from "../../Context/ContactContext";
 
@@ -66,16 +65,10 @@ const GET_CITIES = gql`
 export function Home() {
   const [openModal, setOpenModal] = useState(false);
 
-  const { data: contries } = useQuery(GET_COUNTRIES);
-  const { data: cities } = useQuery(GET_CITIES);
-
-  const pathCountries = contries?.countries.edges;
-  const pathCities = cities?.countries.edges.map((e: any) => e?.node.cities.edges);
+  //const { data: contries } = useQuery(GET_COUNTRIES);
+  //const { data: cities } = useQuery(GET_CITIES);
 
   const { listContacts } = useCreateContact();
-
-  console.log(pathCountries);
-  console.log(pathCities);
 
   return (
     <>
@@ -102,15 +95,13 @@ export function Home() {
 
       {listContacts.map((data: DataContact) => {
         return (
-          <CardFriend data={data} />
+          <CardFriend key={data.id} data={data} />
         )
       })}
 
       <ModalAddFriend
-        open={openModal}
-        setOpen={setOpenModal}
-        contries={pathCountries}
-        cities={pathCities}
+        openModal={openModal}
+        setOpenModal={setOpenModal}
       />
     </>
   )

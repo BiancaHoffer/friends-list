@@ -1,16 +1,32 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+export type ButtonVariant = "yellow" | "red" | "gray";
+
+interface ButtonContainerProps {
+  variant: ButtonVariant;
+}
+
+const buttonVariants = {
+  yellow: "#E2A500",
+  red: "#D21900",
+  gray: "#2B2B2B",
+}
 
 export const Container = styled.div`
 `;
 
-export const ButtonStyle = styled.button`
+export const ButtonStyle = styled.button<ButtonContainerProps>`
   border: none;
   color: ${props => props.theme["white"]};
   font-size: 1.1rem;
 
   padding: 12px 20px;
   border-radius: 12px;
-  background: ${props => props.theme["yellow500"]};
+    
+  ${props => {
+    return css`background-color: ${buttonVariants[props.variant]}`
+  }};
+ 
 
   display: flex;
   justify-content: end;
@@ -20,7 +36,7 @@ export const ButtonStyle = styled.button`
   transition: all 0.4s ;
 
   &:hover {
-    background: ${props => props.theme["yellow600"]};
+    opacity: 0.8;
   }
 `;
 

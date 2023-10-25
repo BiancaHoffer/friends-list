@@ -11,4 +11,16 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 40px;
   margin-bottom: 18px;
+
+  & > div:nth-child(1) {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    & > div {
+      color: ${props => props.theme["yellow500"]};
+      font-size: 20px;
+      margin-top: 4px;
+    } 
+  }
 `

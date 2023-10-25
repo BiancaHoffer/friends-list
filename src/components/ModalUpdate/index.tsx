@@ -1,4 +1,4 @@
-import { MouseEvent, useState, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 
 import { Container, ContainerModal } from "./styles";
 
@@ -7,55 +7,49 @@ import { IoCloseOutline } from "react-icons/io5";
 import { Input } from "../Input";
 import { Button } from "../Button";
 import { InputPhone } from "../InputPhone";
-import { InputSelect } from "../InputSelected";
-import { InputSelectCities } from "../InputSelectedCities";
-import { useCreateContact } from "../../Context/ContactContext";
+
+import { DataContact, useCreateContact } from "../../Context/ContactContext";
+import { useNavigate } from "react-router-dom";
 
 interface ModalAddFriendProps {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  openModal: boolean;
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+  data: DataContact
   contries?: any[];
   cities?: any[];
 }
+export function ModalUpdateFriend({ openModal, setOpenModal, data }: ModalAddFriendProps) {
+  const [name, setName] = useState(data?.name);
+  const [email, setEmail] = useState(data?.email);
+  const [phone, setPhone] = useState(data?.phone);
 
-interface DataContact {
-  name: string;
-  email: string;
-  phone: string;
-}
+  const { updateContact } = useCreateContact();
 
-export function ModalUpdateFriend({ open, setOpen, contries, cities }: ModalAddFriendProps) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-
-  const { addContact } = useCreateContact();
+  const navitage = useNavigate()
 
   function handleAddContact(event: FormEvent) {
     event.preventDefault();
 
-    const UIDProductGenerate = Math.floor(Date.now() * Math.random()).toString(32);
-
     const data = {
-      id: UIDProductGenerate,
       name,
       email,
       phone,
     } as DataContact;
 
-    addContact(data);
-    console.log(data)
+    updateContact(data);
+    setOpenModal(false);
+    navitage("/")
   };
 
   return (
     <Container
-      closeModal={open}
+      closeModal={openModal}
     >
       <ContainerModal>
         <div>
-          <p>Adicionar amigo</p>
+          <p>Editar dados do amigo</p>
           <button
-            onClick={() => setOpen(false)}
+            onClick={() => setOpenModal(false)}
             type="button"
           >
             <IoCloseOutline />
@@ -68,22 +62,27 @@ export function ModalUpdateFriend({ open, setOpen, contries, cities }: ModalAddF
             <Input
               placeholder="Nome completo"
               type="text"
+              value={name}
               onChange={(e) => setName(e.target.value)}
             />
             <Input
+              value={email}
               placeholder="E-mail"
               type="email"
               onChange={(e) => setEmail(e.target.value)}
             />
-            <InputPhone placeholder="000 000 000" onChange={(e) => setPhone(e.target.value)} />
+            <InputPhone
+              value={phone}
+              placeholder="000 000 000"
+              onChange={(e) => setPhone(e.target.value)}
+            />
           </div>
 
           <p style={{ marginTop: "40px" }}>
             Localização
           </p>
           <div>
-            <InputSelect title="país" data={contries} />
-            <InputSelectCities title="sitio" data={cities} />
+
           </div>
 
           <span>
@@ -92,8 +91,10 @@ export function ModalUpdateFriend({ open, setOpen, contries, cities }: ModalAddF
               type="submit"
             />
             <Button
+              onClick={() => setOpenModal(false)}
               title="Cancelar"
               type="button"
+              variant="gray"
             />
           </span>
         </form>

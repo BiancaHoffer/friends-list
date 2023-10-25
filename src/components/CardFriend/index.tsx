@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Container } from "./styles";
-import { DataContact, useCreateContact } from "../../Context/ContactContext";
+import { DataContact } from "../../Context/ContactContext";
 
 interface CardProps {
   data: DataContact;
