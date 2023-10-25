@@ -4,9 +4,8 @@ export const Container = styled.div`
   background-color: ${props => props.theme["gray800"]};
   border-radius: 12px;
   max-width: 900px;
-  margin: 0 auto;
   padding: 40px;
-  margin-bottom: 18px;
+  margin: auto;
   border:1px solid transparent;
   cursor: pointer;
 
@@ -20,30 +19,23 @@ export const Container = styled.div`
     border: 1px solid ${props => props.theme["yellow500"]};
   }
 
-  & > div:nth-child(1) {
+  & > div {
     display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background-color: ${props => props.theme["gray900"]};
-    border-radius: 999px;
-    border: 1px solid ${props => props.theme["yellow500"]};
-    width: 80px;
-    height: 80px;
-  }
-
-  & > div:nth-child(2) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    
     flex-direction: column;
     gap: 16px;
     color: ${props => props.theme["gray400"]};
 
-    p {
+    & > p:nth-child(1) {
       color: white;
       font-weight: 600;
-      font-size: 18px;
+      font-size: 1.1rem;
+    }
+
+    & > p:nth-child(2) {
+      color: ${props => props.theme["gray400"]};
+      font-weight: 500;
+      font-size: 1rem;
     }
   }
 `

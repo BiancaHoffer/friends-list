@@ -1,4 +1,5 @@
-import { Link, useRoutes } from "react-router-dom";
+import { Link, useLocation, useParams, useRoutes } from "react-router-dom";
+import { useState } from "react"
 
 import { ContentHeader, Header, Avatar } from "./styles";
 
@@ -6,7 +7,12 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoCreateOutline } from "react-icons/io5";
 import { CardSingleFriend } from "../../components/CardSingleFriend";
 
+import { ModalUpdateFriend } from "../../components/ModalUpdate";
+
 export function Contact() {
+  const [openModal, setOpenModal] = useState(false);
+  const { state } = useLocation();
+
   return (
     <>
       <Header>
@@ -17,10 +23,10 @@ export function Contact() {
               Voltar
             </Link>
 
-            <Link to="/">
+            <button onClick={() => setOpenModal(true)}>
               <IoCreateOutline />
               Editar
-            </Link>
+            </button>
           </div>
 
           <div>
@@ -28,16 +34,18 @@ export function Contact() {
               avatar
             </Avatar>
 
-            <h1>Bianca Macedo</h1>
+            <h1>{state.name}</h1>
 
             <span>
-              +000 0000-0000
+              {state.phone}
             </span>
           </div>
         </ContentHeader>
       </Header>
 
-      <CardSingleFriend />
+      <CardSingleFriend data={state} />
+
+      <ModalUpdateFriend open={openModal} setOpen={setOpenModal} />
     </>
   )
 }

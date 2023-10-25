@@ -21,7 +21,7 @@ const teste = [{
   phone_number: "55",
 }]
 
-export function InputSelect({ title, data = [] }: InputSelectProps) {
+export function InputSelectCities({ title, data = [] }: InputSelectProps) {
   const [openSelect, setOpenSelect] = useState(false);
   const [itemSeleted, setItemSeleted] = useState(`Selecionar ${title}...`);
 
@@ -53,18 +53,22 @@ export function InputSelect({ title, data = [] }: InputSelectProps) {
 
         <Options openSelect={openSelect}>
           <div id="option">
-            {data?.map((i: any) => {
+            {data?.map((city: any) => {
               return (
-                <Item key={i.id}>
-                  <input
-                    type="radio"
-                    name="country"
-                    value={i.node.name}
-                    onChange={handleGetCountry}
-                  />
+                city.map((i: any) => {
+                  return (
+                    <Item key={i.id}>
+                      <input
+                        type="radio"
+                        name="country"
+                        value={i.name}
+                        onChange={handleGetCountry}
+                      />
 
-                  <label>{i.node.name}</label>
-                </Item>
+                      <label>{i.name}</label>
+                    </Item>
+                  )
+                })
               )
             })}
           </div>

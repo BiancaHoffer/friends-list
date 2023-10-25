@@ -12,8 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme["white"]};
   }
 
-  
-  body::-webkit-scrollbar {
+    body::-webkit-scrollbar {
       width: 4px;
     }
 

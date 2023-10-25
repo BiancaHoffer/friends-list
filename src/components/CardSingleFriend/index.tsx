@@ -1,17 +1,32 @@
+import { useNavigate } from "react-router-dom";
+import { DataContact, useCreateContact } from "../../Context/ContactContext";
+import { Button } from "../Button";
 import { Container } from "./styles";
 
-export function CardSingleFriend() {
+interface CardProps {
+  data: DataContact
+}
+
+export function CardSingleFriend({ data }: CardProps) {
+  const { removeContact } = useCreateContact();
+  const navigate = useNavigate();
+
+  function handleDeleteContact(id: string) {
+    removeContact(id);
+    navigate("/")
+  }
+
   return (
     <Container>
       <div>
-        avatar
+        {data.email}
       </div>
 
       <div>
-        <p>Bianca Macedo</p>
-        <span>
-          +000 0000-0000
-        </span>
+        <Button
+          //@ts-ignore
+          onClick={() => handleDeleteContact(data?.id)}
+          title="Deletar contato" />
       </div>
     </Container>
   )

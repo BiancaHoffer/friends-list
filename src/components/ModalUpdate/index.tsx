@@ -24,7 +24,7 @@ interface DataContact {
   phone: string;
 }
 
-export function ModalAddFriend({ open, setOpen, contries, cities }: ModalAddFriendProps) {
+export function ModalUpdateFriend({ open, setOpen, contries, cities }: ModalAddFriendProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
