@@ -31,7 +31,7 @@ export const InputStyle = styled.input<props>`
   background-color: transparent;
   color: ${props => props.theme["gray400"]};
   border: none;
-  border-radius: 0px 16px 16px 0px;
+  border-radius: 0px 16px;
   padding: ${props => props.icon ? "20px 16px 20px 0px" : "16px 20px"} ;
 `;
 

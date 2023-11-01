@@ -1,13 +1,14 @@
 import { useState, FormEvent } from "react";
 
-import { Container, ContainerModal } from "./styles";
+import { Opacity, ContainerModal } from "./styles";
 
 import { IoCloseOutline } from "react-icons/io5";
 
 import { Input } from "../Input";
 import { Button } from "../Button";
 import { InputPhone } from "../InputPhone";
-import { useCreateContact } from "../../Context/ContactContext";
+import { useContact } from "../../Context/ContactContext";
+import { InputSelect } from "../InputSelected";
 
 interface ModalAddFriendProps {
   openModal: boolean;
@@ -24,8 +25,9 @@ export function ModalAddFriend({ openModal, setOpenModal }: ModalAddFriendProps)
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [codePhone, setCodePhone] = useState("");
 
-  const { addContact } = useCreateContact();
+  const { addContact } = useContact();
 
   function handleAddContact(event: FormEvent) {
     event.preventDefault();
@@ -49,57 +51,20 @@ export function ModalAddFriend({ openModal, setOpenModal }: ModalAddFriendProps)
   };
 
   return (
-    <Container
+    <Opacity
       closeModal={openModal}
     >
       <ContainerModal>
-        <div>
-          <p>Adicionar amigo</p>
-          <button
-            onClick={() => setOpenModal(false)}
-            type="button"
-          >
+        <div id="title-buttonclose">
+          <h2>Adicionar amigo</h2>
+
+          <button onClick={() => setOpenModal(false)}>
             <IoCloseOutline />
           </button>
+
         </div>
 
-        <form onSubmit={handleAddContact}>
-          <p>Dados de contato</p>
-          <div>
-            <Input
-              placeholder="Nome completo"
-              type="text"
-              onChange={(e) => setName(e.target.value)}
-            />
-            <Input
-              placeholder="E-mail"
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <InputPhone placeholder="000 000 000" onChange={(e) => setPhone(e.target.value)} />
-          </div>
-
-          <p style={{ marginTop: "40px" }}>
-            Localização
-          </p>
-          <div>
-
-          </div>
-
-          <span>
-            <Button
-              title="Salvar"
-              type="submit"
-            />
-            <Button
-              onClick={() => setOpenModal(false)}
-              title="Cancelar"
-              type="button"
-              variant="gray"
-            />
-          </span>
-        </form>
       </ContainerModal>
-    </Container>
+    </Opacity>
   )
 }

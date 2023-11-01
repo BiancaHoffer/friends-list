@@ -4,7 +4,7 @@ interface props {
   closeModal?: boolean;
 }
 
-export const Container = styled.div<props>`
+export const Opacity = styled.div<props>`
   position: fixed;
   top:0;
 
@@ -19,69 +19,16 @@ export const Container = styled.div<props>`
 `;
 
 export const ContainerModal = styled.div`
- // position: absolute;
   background-color: ${props => props.theme["gray800"]};
-  padding: 40px;
-  border-radius: 16px;
+  padding: 32px;
+  border-radius: 8px;
   width: 900px;
   margin: 12px;
   cursor: auto;
 
   z-index: 10;
 
-  & > div:nth-child(1) {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    color: ${props => props.theme["white"]};
-    font-weight: 600;
-    font-size: 1.2rem;
-
-    > button {
-      background-color: transparent;
-      border: none;
-      padding: 20px;
-      font-size: 28px;
-      color: ${props => props.theme["white"]};
-
-      transition: all 0.3s ease-out;
-
-      &:hover {
-        color: ${props => props.theme["yellow500"]};
-      }
-    }
-  }
-
-    form {
-      display: flex;
-      flex-direction: column;
-
-      p {
-        text-align: start;
-        color: ${props => props.theme["gray500"]};
-        font-size: 1.1rem;
-        margin-bottom: 8px;
-      }
-
-      p:nth-child(2) {
-        margin-top: 20px;
-      }
-
-      & > div {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-
-        @media(max-width: 768px) {
-         grid-template-columns: 1fr;
-        }
-      }
-
-      & > span {
-        margin-top: 40px;
-        display: flex;
-        gap: 16px;
-      }
+  #title-buttonclose {
+    
   }
 `;

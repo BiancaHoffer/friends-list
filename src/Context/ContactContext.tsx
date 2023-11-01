@@ -26,71 +26,11 @@ export interface DataContact {
   name: string;
   email: string;
   phone: string;
+  iso2?: string;
+  codePhone?: string;
 }
 
 export const ContactContext = createContext({} as AuthContextProps);
-
-const GET_COUNTRIES = gql`
-  {
-    countries(
-      page: { first: 5, after: "eyJjdXJzb3IiOjE1Mn0" }
-    ) {
-      totalCount
-      edges {
-        cursor
-        node {
-          id
-          name
-          iso2
-          
-          states (page: { first: 5 }) {
-            edges {
-              node {
-                id
-                name
-                state_code
-              }
-            }
-          }
-        }
-      }
-      pageInfo {
-        hasNextPage
-        hasPreviousPage
-        endCursor
-        startCursor
-      }
-    }
-  }
-`;
-
-const GET_CITIES = gql`
-  {
-    state(
-      locationCode: { country_code: "NR",  state_code: "01"}) {
-      # State Fields
-      id
-      name
-      country_id
-      cities(page: { first: 8 }) {
-        totalCount
-        edges {
-          cursor
-          node {
-            id
-            name
-            state_id
-            state_code
-          }
-        }
-      }
-      # ...
-    }
-  }
-`;
-
-
-
 
 export function ContactProvider({ children }: AuthProviderProps) {
   const [listContacts, setListContacts] = useState<DataContact[]>(() => {
@@ -109,6 +49,10 @@ export function ContactProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     localStorage.setItem("@biancamacedo", JSON.stringify(listContacts));
+
+    if (listContacts.length === 0) {
+      alert("Nenhum amigo encontrado")
+    }
   }, [listContacts]);
 
 
@@ -138,7 +82,7 @@ export function ContactProvider({ children }: AuthProviderProps) {
   )
 }
 
-export function useCreateContact() {
+export function useContact() {
   const context = useContext(ContactContext);
 
   return context;

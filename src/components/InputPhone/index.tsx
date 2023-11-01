@@ -1,83 +1,105 @@
-import { ComponentProps, ReactNode, useState } from "react";
+import { useState, ComponentProps } from "react";
 
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp, IoMdCheckmark } from "react-icons/io";
 
-import { Container, InputStyle, Select, SelectButton, Option, ContentOption } from "./styles";
+import { Container, Select, Option, Input } from "./styles";
 
-
-interface ButtonProps extends ComponentProps<'input'> {
-  icon?: ReactNode;
+interface CountryData {
+  id: number;
+  name: string;
+  phone_code: string;
+  emoji: string;
 }
 
-const teste = [{
+const countries = [{
   id: 200,
   name: "Singapore",
   phone_code: "65",
+  emoji: "ph",
 }, {
   id: 222,
   name: "Thailand",
   phone_code: "66",
+  emoji: "br",
 }, {
   id: 224,
   name: "Alabama",
   phone_code: "11",
+  emoji: "br",
 }]
 
-export function InputPhone({ icon, ...props }: ButtonProps) {
-  const [openSelect, setOpenSelect] = useState(false);
-  const [itemSeleted, setItemSeleted] = useState("1");
+interface InputProps extends ComponentProps<'input'> {
 
-  function handleGetPhoneCode(e: any) {
-    setOpenSelect(false);
-    setItemSeleted(e.target.value);
+};
+
+export function InputPhone({ ...props }: InputProps) {
+  const [isSelected, setisSelected] = useState(false);
+  const [itemSeleted, setItemSeleted] = useState("");
+  const [flag, setFlag] = useState("https://flagcdn.com/pt.svg")
+
+  function handleSelect(country: CountryData) {
+    setisSelected(false);
+    setFlag(`https://flagcdn.com/${country.emoji}.svg`)
   }
-
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <Container>
-        <Select>
-          <div id="phone-select">
-            <label htmlFor="select-number-country"></label>
-            <input
-              type="checkbox"
-              id="select-number-country"
-              onChange={() => setOpenSelect(!openSelect)}
+    <Container isSelected={isSelected}>
+      <div>
+
+
+        <Select isSelected={isSelected}>
+          <input
+            type="checkbox"
+            onChange={() => setisSelected(!isSelected)}
+          />
+
+          <div id="item-selected">
+            +
+            <img
+              src={flag}
+              width="30"
+              alt="Ukraine"
             />
+          </div>
 
-            <SelectButton>
-              <div id="select-value">
-                + {itemSeleted}
-              </div>
-
-              <div id="chevrons">
-                {openSelect ? <IoIosArrowUp /> : <IoIosArrowDown />}
-              </div>
-            </SelectButton>
+          <div>
+            {isSelected ? <IoIosArrowUp /> : <IoIosArrowDown />}
           </div>
         </Select>
 
-        <InputStyle {...props} />
-      </Container>
+        <Option isSelected={isSelected}>
+          <div id="options-content">
+            {countries.map((country) => {
+              return (
+                <div key={country.id}>
+                  <input
+                    type="radio"
+                    name="item"
+                    value={country.phone_code}
+                    onChange={(e) => setItemSeleted(e.target.value)}
+                    onClick={() => handleSelect(country)}
+                  />
 
-      <Option openSelect={openSelect}>
-        <ContentOption>
-          {teste.map(i => {
-            return (
-              <li key={i.id} id="option">
-                <input
-                  type="radio"
-                  name="country"
-                  value={i.phone_code}
-                  onChange={handleGetPhoneCode}
-                />
+                  <div id="item">
+                    <img
+                      src={`https://flagcdn.com/${country.emoji}.svg`}
+                      width="30"
+                      alt="Ukraine"
+                    />
 
-                <i>Bandeira</i>
-                <label>{i.name} (+ {i.phone_code})</label>
-              </li>
-            )
-          })}
-        </ContentOption>
-      </Option>
-    </div>
+                    (+ {country.phone_code})
+                  </div>
+
+                  <div id="check">
+                    {itemSeleted === country.phone_code && <IoMdCheckmark />}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </Option>
+      </div>
+
+      <Input {...props} />
+    </Container>
   )
 }

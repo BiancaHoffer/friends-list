@@ -1,8 +1,8 @@
 import { ComponentProps, useState } from "react";
 
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown, IoIosArrowUp, IoMdCheckmark } from "react-icons/io";
 
-import { Container, Select, Options, Item } from "./styles";
+import { Container, Select, Option } from "./styles";
 
 
 interface InputSelectProps extends ComponentProps<'input'> {
@@ -21,58 +21,62 @@ const countries = [
     phone_number: "55",
   },
   {
-    id: 2,
+    id: 3,
     name: "Alemanha",
     phone_number: "55",
   }
 ]
 
 export function InputSelect({ title }: InputSelectProps) {
-  const [openSelect, setOpenSelect] = useState(false);
+  const [isSelected, setisSelected] = useState(false);
   const [itemSeleted, setItemSeleted] = useState(`Selecionar ${title}...`);
 
-  function handleGetCountry(e: any) {
-    setOpenSelect(false);
-    setItemSeleted(e.target.value);
+  console.log(itemSeleted)
+
+  function handleSelect(e: any) {
+    setisSelected(false);
   }
 
   return (
     <Container>
-      <Select openSelect={openSelect}>
-        <label htmlFor="option-view-button"></label>
+      <Select isSelected={isSelected}>
         <input
           type="checkbox"
-          id="option-view-button"
-          onChange={() => setOpenSelect(!openSelect)}
+          onChange={() => setisSelected(!isSelected)}
         />
 
-        <div id="select-button">
-          <div>{itemSeleted}</div>
+        <div>
+          {itemSeleted}
+        </div>
 
-          <div id="chevrons">
-            {openSelect ? <IoIosArrowUp /> : <IoIosArrowDown />}
-          </div>
+        <div>
+          {isSelected ? <IoIosArrowUp /> : <IoIosArrowDown />}
         </div>
       </Select>
 
-      <Options openSelect={openSelect}>
-        <div id="option">
-          {countries?.map((i: any) => {
+      <Option isSelected={isSelected}>
+        <div id="options-content">
+          {countries.map((country) => {
             return (
-              <Item key={i.id}>
+              <div key={country.id}>
                 <input
                   type="radio"
-                  name="country"
-                  value={i.name}
-                  onChange={handleGetCountry}
+                  name="item"
+                  value={country.name}
+                  onChange={(e) => setItemSeleted(e.target.value)}
+                  onClick={handleSelect}
                 />
 
-                <label>{i.name}</label>
-              </Item>
+                {country.name}
+
+                <div className="text-primary">
+                  {itemSeleted === country.name && <IoMdCheckmark />}
+                </div>
+              </div>
             )
           })}
         </div>
-      </Options>
+      </Option>
     </Container>
   )
 }

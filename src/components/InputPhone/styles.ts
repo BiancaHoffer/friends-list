@@ -1,118 +1,120 @@
 import styled from 'styled-components';
 
 interface props {
-  openSelect: boolean;
+  isSelected: boolean;
 }
 
-export const Container = styled.div`
+export const Container = styled.div<props>`
   display: flex;
-  gap: 4px;
-
+  
+  width: 100%;
   border: 1px solid transparent;
-  background-color: ${props => props.theme["gray900"]};
-  color: ${props => props.theme["gray500"]};
-  border-radius: 12px;
+  border-radius: 16px;
 
   transition: all 0.3s;
 
   &:hover {
     border: 1px solid ${props => props.theme["yellow500"]};
-    color: ${props => props.theme["yellow500"]};
   }
 
   &:focus-within {
     border: 1px solid ${props => props.theme["yellow500"]};
-    color: ${props => props.theme["yellow500"]};
   }
-`;
+`
 
-export const InputStyle = styled.input`
+export const Select = styled.div<props>`
+  position: relative;
+  
+  display: flex;
+  justify-content: space-between;
+
+  background-color: ${props => props.theme["gray800"]};
+  width: 120px;
+  padding: 16px 20px;
+  border-radius: 16px 0px 0px 16px;
+  border: 1px solid transparent;
+
+  transition: all 0.3s;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  #item-selected {
+    display: flex;
+    gap: 8px;
+  }
+
+  input {
+    all: unset;
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+  }
+`
+
+export const Option = styled.div<props>`
+  position: relative;
+
+  display: ${props => props.isSelected ? "flex" : "none"};
+
+  width: 100%;
+  
+  #options-content {
+    position: absolute;
+    
+    width: 200px;
+    max-height: 200px;
+    border-radius: 16px;
+    border: 1px solid ${props => props.theme["gray500"]};
+    margin-top: 8px;
+    background-color: ${props => props.theme["gray900"]};
+
+    transition: all 0.3s;
+
+    & > div {
+      position: relative;
+
+      display: flex;
+      justify-content: space-between;
+
+      padding: 12px 16px;
+      border-bottom: 1px solid ${props => props.theme["gray800"]};
+
+      transition: all 0.3s;
+
+      &:hover {
+        color: ${props => props.theme["yellow500"]};
+      }
+
+      & > input {
+        all: unset;
+        position: absolute;
+        inset: 0;
+        cursor: pointer;
+      }
+
+      & > p {
+        color: ${props => props.theme["gray400"]}
+      }
+
+      & #item {
+        display: flex;
+        gap: 18px;
+      }
+      
+      & > #check {
+        color: ${props => props.theme["yellow500"]};
+        font-size: 16px;
+      }
+    }
+  }
+`
+
+export const Input = styled.input`
+  width: 100%;
+  padding: 0px 16px;
   background-color: transparent;
   color: ${props => props.theme["gray400"]};
-  border: none;
-  border-radius: 0px 16px 16px 0px;
-  padding: 16px ;
-`;
-
-export const Select = styled.div`
-  background-color: ${props => props.theme["gray800"]};
-  min-width: 80px;
-  border-radius: 12px 0px 0px 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  #phone-select {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #select-number-country {
-    all: unset;
-    position: absolute;
-    inset: 0;
-    cursor: pointer;
-    z-index: 999;
-  }
-`
-
-export const SelectButton = styled.div`
-  display: flex;
-  gap: 8px;
-  font-size: 1rem; 
-`
-
-export const Option = styled.ul<props>`
-  position: relative;
-  display: ${props => props.openSelect ? "inline" : "none"};  
-
-  width: 100%;
-  margin-top: 4px;
-  border-radius: 4px;
-  border: none;
-`
-
-export const ContentOption = styled.div`
-  position: absolute;
-
-  width: 100%;
-  background-color: ${props => props.theme["gray900"]};
-  border-radius: 8px;
-  border: none;
-
-  #option {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    z-index: 20;
-
-    background-color: ${props => props.theme["gray900"]};
-    width: 100%;
-    padding: 12px;
-    border-radius: 4px;
-    border: 1px solid transparent;
-
-    label {
-      margin-top: 0;
-      color: ${props => props.theme["gray400"]};
-    }
-
-    &:hover {
-      background-color: ${props => props.theme["gray800"]};
-      border: 1px solid ${props => props.theme["yellow500"]}
-    }
-  }
-
-  #option input[type="radio"]{
-    all: unset;
-    position: absolute;
-    inset: 0;
-    cursor: pointer;
-  }
+  border:none;
 `

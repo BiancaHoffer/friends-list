@@ -1,110 +1,98 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 interface props {
-  openSelect: boolean;
+  isSelected: boolean;
 }
 
 export const Container = styled.div`
-
+  width: 100%;
 `
 
 export const Select = styled.div<props>`
   position: relative;
+  
+  display: flex;
+  justify-content: space-between;
 
-  background-color: transparent;
-
-  border-radius: 12px;
+  background-color: ${props => props.theme["gray900"]};
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 16px;
   border: 1px solid transparent;
 
-  transition: all .3s;
+  transition: all 0.3s;
 
   &:hover {
-    border: 1px solid ${props => props.theme["yellow500"]}
+    border: 1px solid ${props => props.theme["yellow500"]};
   }
-  
-  #option-view-button {
+
+  &:focus-within {
+    border: 1px solid ${props => props.isSelected ? props.theme["yellow500"] : "transparent"};
+  }
+
+  input {
     all: unset;
     position: absolute;
     inset: 0;
     cursor: pointer;
   }
+`
 
-  #select-button {
-    display: flex;
-    justify-content: space-between;
-    background-color: ${props => props.theme.gray900};
-    border-radius: 12px;
-    padding: 16px 20px;
-    border: 1px solid ${props => props.openSelect ? props.theme["yellow500"] : "transparent"};
-    color: ${props => props.theme["gray400"]};
+export const Option = styled.div<props>`
+  position: relative;
+  z-index: 999;
+
+  display: ${props => props.isSelected ? "flex" : "none"};
+
+  width: 100%;
+  
+  #options-content {
+    position: absolute;
+
+    width: 100%;
+    max-height: 200px;
+    border-radius: 16px;
+    border: 1px solid ${props => props.theme["gray500"]};
+    margin-top: 8px;
+    background-color: ${props => props.theme["gray900"]};
+
     transition: all 0.3s;
 
     &:hover {
-    border: 1px solid ${props => props.theme["yellow500"]}
-  }
-  }
-`
-
-export const Options = styled.div<props>`
-  position: relative;
-  z-index: 20;
-
-  height: 140px;
-  display: ${props => props.openSelect ? "inline-block" : "none"};
-  width: 100%;
-
-  margin-top: 8px;
-
-  overflow-y: scroll;
+      border: 1px solid ${props => props.theme["yellow500"]};
+    }
   
+    & > div {
+      position: relative;
 
-  &::-webkit-scrollbar {
-    width: 4px;
-    border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+
+      padding: 12px 16px;
+      border-bottom: 1px solid ${props => props.theme["gray800"]};
+      border-radius: 0px;
+
+      transition: all 0.3s;
+
+      &:hover {
+        color: ${props => props.theme["yellow500"]};
+      }
+
+      & > input {
+        all: unset;
+        position: absolute;
+        inset: 0;
+        cursor: pointer;
+      }
+
+      & > p {
+        color: ${props => props.theme["gray400"]}
+      }
+
+      & > div {
+        color: ${props => props.theme["yellow500"]};
+        font-size: 16px;
+      }
+    }
   }
-
-  &::-webkit-scrollbar-track {
-    background:  ${props => props.theme["gray900"]};  
-    height: 140px;  
-  }
-
-  &s::-webkit-scrollbar-thumb {
-    background-color:  ${props => props.theme["gray500"]};
-
-  }
-
-  #option {
-    position: absolute;
-    
-    //margin-top: -8px;
-    width: 100%;
-    background-color: ${props => props.theme["gray900"]};
-  }
-`
-
-export const Item = styled.li`
-  position: relative;
-  display: flex;
-  padding: 12px;
-  border-radius: 2px;
-  border: 1px solid transparent;
-
-  display: flex;
-  gap: 12px;
-
-   input[type="radio"]{
-    all: unset;
-    position: absolute;
-    inset: 0;
-    cursor: pointer; 
-  }
-
-  label {
-    color: ${props => props.theme["gray400"]};
-  }
-
-   &:hover {
-    background: ${props => props.theme["gray800"]};
-    border: 1px solid ${props => props.theme["yellow500"]}
-   }
 `

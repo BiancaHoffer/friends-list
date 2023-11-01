@@ -8,7 +8,7 @@ import { Input } from "../Input";
 import { Button } from "../Button";
 import { InputPhone } from "../InputPhone";
 
-import { DataContact, useCreateContact } from "../../Context/ContactContext";
+import { DataContact, useContact } from "../../Context/ContactContext";
 import { useNavigate } from "react-router-dom";
 
 interface ModalAddFriendProps {
@@ -23,9 +23,9 @@ export function ModalUpdateFriend({ openModal, setOpenModal, data }: ModalAddFri
   const [email, setEmail] = useState(data?.email);
   const [phone, setPhone] = useState(data?.phone);
 
-  const { updateContact } = useCreateContact();
+  const { updateContact } = useContact();
 
-  const navitage = useNavigate()
+  const navigate = useNavigate();
 
   function handleAddContact(event: FormEvent) {
     event.preventDefault();
@@ -38,7 +38,7 @@ export function ModalUpdateFriend({ openModal, setOpenModal, data }: ModalAddFri
 
     updateContact(data);
     setOpenModal(false);
-    navitage("/")
+    navigate("/");
   };
 
   return (
