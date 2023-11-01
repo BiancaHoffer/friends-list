@@ -11,30 +11,13 @@ interface InputSelectProps extends ComponentProps<'input'> {
   title?: string;
 }
 
-const countries = [
-  {
-    id: 1,
-    name: "Brasil",
-    phone_number: "55",
-  },
-  {
-    id: 2,
-    name: "Portugal",
-    phone_number: "55",
-  },
-  {
-    id: 3,
-    name: "Alemanha",
-    phone_number: "55",
-  }
-]
-
 export function InputSelectCities({ title, ...props }: InputSelectProps) {
   const [isSelected, setisSelected] = useState(false);
   const [itemSeleted, setItemSeleted] = useState(`Selecionar ${title}`);
 
   const { queryCities } = useGeo();
 
+  //@ts-ignore
   function handleSelect(e: any) {
     setisSelected(false);
   }

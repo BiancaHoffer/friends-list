@@ -18,7 +18,7 @@ export function InputSelect({ title, setSelected, ...props }: InputSelectProps) 
   const [itemSeleted, setItemSeleted] = useState(`Selecionar ${title}`);
   const [iso, setIso] = useState("");
 
-  const { queryCountries, filter, setFilter } = useGeo();
+  const { queryCountries, setFilter } = useGeo();
 
   function handleSelect(country: CountryData) {
     setisSelected(false);

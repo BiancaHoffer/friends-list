@@ -69,7 +69,7 @@ export function ModalAddFriend({ openModal, setOpenModal }: ModalAddFriendProps)
               } as DataForm;
 
               addContact(data);
-              console.log(data)
+              //console.log(data)
             })
         });
     }

@@ -9,7 +9,6 @@ import { Button } from "../Button";
 import { InputPhone } from "../InputPhone";
 
 import { DataForm, useContact } from "../../Context/ContactContext";
-import { useNavigate } from "react-router-dom";
 import { InputImage, Opacity } from "../ModalAddFriend/styles";
 import { InputSelect } from "../InputSelected";
 import { InputSelectCities } from "../InputSelectCities";
