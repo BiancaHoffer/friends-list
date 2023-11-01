@@ -39,7 +39,7 @@ export function ModalAddFriend({ openModal, setOpenModal }: ModalAddFriendProps)
     event.preventDefault();
 
     if (avatar == null) {
-      alert("Por favor, insira uma imagem do produto.");
+      alert("Por favor, insira uma imagem do amigo.");
       return;
     }
 
@@ -78,6 +78,13 @@ export function ModalAddFriend({ openModal, setOpenModal }: ModalAddFriendProps)
     }
     finally {
       setOpenModal(false);
+      setName("");
+      setEmail("");
+      setPhone("");
+      setCodePhone("");
+      setIso2("");
+      setCountry("");
+      setAvatar(null);
     }
   };
 

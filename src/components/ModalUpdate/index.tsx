@@ -39,7 +39,7 @@ export function ModalUpdateFriend({ openModal, setOpenModal, data }: ModalAddFri
     event.preventDefault();
 
     if (avatar == null) {
-      alert("Por favor, insira uma imagem do produto.");
+      alert("Por favor, insira uma imagem do amigo.");
       return;
     }
 
