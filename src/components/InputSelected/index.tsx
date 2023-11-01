@@ -27,9 +27,9 @@ const countries = [
   }
 ]
 
-export function InputSelect({ title }: InputSelectProps) {
+export function InputSelect({ title, ...props }: InputSelectProps) {
   const [isSelected, setisSelected] = useState(false);
-  const [itemSeleted, setItemSeleted] = useState(`Selecionar ${title}...`);
+  const [itemSeleted, setItemSeleted] = useState(`Selecionar ${title}`);
 
   console.log(itemSeleted)
 
@@ -43,6 +43,7 @@ export function InputSelect({ title }: InputSelectProps) {
         <input
           type="checkbox"
           onChange={() => setisSelected(!isSelected)}
+          {...props}
         />
 
         <div>

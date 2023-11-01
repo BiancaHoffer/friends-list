@@ -11,6 +11,8 @@ export const Container = styled.div<props>`
   border: 1px solid transparent;
   border-radius: 16px;
 
+  background-color: ${props => props.theme["gray900"]};
+
   transition: all 0.3s;
 
   &:hover {
@@ -55,6 +57,7 @@ export const Select = styled.div<props>`
 
 export const Option = styled.div<props>`
   position: relative;
+  z-index: 999;
 
   display: ${props => props.isSelected ? "flex" : "none"};
 

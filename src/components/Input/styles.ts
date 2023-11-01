@@ -7,7 +7,8 @@ interface props {
 export const Container = styled.div`
   display: flex;
   gap: 4px;
-
+ 
+  width: 100%;
   border: 1px solid transparent;
   background-color: ${props => props.theme["gray900"]};
   color: ${props => props.theme["gray500"]};

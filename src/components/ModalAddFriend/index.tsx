@@ -61,8 +61,29 @@ export function ModalAddFriend({ openModal, setOpenModal }: ModalAddFriendProps)
           <button onClick={() => setOpenModal(false)}>
             <IoCloseOutline />
           </button>
-
         </div>
+
+        <form action="">
+          <div id="name-email" style={{ display: "flex" }}>
+            <Input placeholder="Nome completo" type="text" required />
+            <Input placeholder="E-mail" type="email" required />
+          </div>
+
+          <div id="image-phone">
+            <InputPhone placeholder="Telefone *" type="tel" required />
+            <Input placeholder="imagem" />
+          </div>
+
+          <div id="country-city">
+            <InputSelect title="país *" required />
+            <InputSelect title="sitio *" required />
+          </div>
+
+          <div id="buttons">
+            <Button title="Salvar" type="submit" />
+            <Button title="Cancelar" type="button" variant="gray" />
+          </div>
+        </form>
 
       </ContainerModal>
     </Opacity>

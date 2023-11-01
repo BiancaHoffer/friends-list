@@ -1,8 +1,17 @@
 import { useState, ComponentProps } from "react";
 
-import { IoIosArrowDown, IoIosArrowUp, IoMdCheckmark } from "react-icons/io";
+import {
+  IoIosArrowDown,
+  IoIosArrowUp,
+  IoMdCheckmark
+} from "react-icons/io";
 
-import { Container, Select, Option, Input } from "./styles";
+import {
+  Container,
+  Select,
+  Option,
+  Input
+} from "./styles";
 
 interface CountryData {
   id: number;

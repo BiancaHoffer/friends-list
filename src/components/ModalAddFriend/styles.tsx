@@ -29,6 +29,44 @@ export const ContainerModal = styled.div`
   z-index: 10;
 
   #title-buttonclose {
-    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 32px;
+
+    & > button {
+      background-color: transparent;
+      border: none;
+      font-size: 32px;
+      color: white;
+
+      transition: color 0.3s;
+
+      &:hover {
+        color: ${props => props.theme["yellow500"]}
+      } 
+    }
+
+    & > h2 {
+      font-size: 18px;
+    }
   }
+
+  form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    } 
+
+  #name-email, #image-phone, #country-city, #buttons {
+    display: flex;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px
+  }
+
+  #buttons {
+    margin-top: 18px;
+  }
+  
 `;
