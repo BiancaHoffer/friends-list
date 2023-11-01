@@ -12,12 +12,12 @@ export const Container = styled.div`
   padding: 40px;
   margin-bottom: 18px;
 
-  & > div:nth-child(1) {
+  #item {
     display: flex;
     align-items: center;
     gap: 8px;
 
-    & > div {
+    #icon {
       color: ${props => props.theme["yellow500"]};
       font-size: 20px;
       margin-top: 4px;

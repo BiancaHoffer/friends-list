@@ -23,21 +23,43 @@ export const Container = styled.div`
 
   & > div {
     display: flex;
-    
     flex-direction: column;
     gap: 16px;
+
     color: ${props => props.theme["gray400"]};
 
-    & > p:nth-child(1) {
-      color: white;
+    & > div {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+
+      img {
+        width: 32px;
+      }
+
+      & > p {
+      color: ${props => props.theme["white"]};
       font-weight: 600;
       font-size: 1.1rem;
     }
+    }
 
-    & > p:nth-child(2) {
+    & > p {
       color: ${props => props.theme["gray400"]};
       font-weight: 500;
       font-size: 1rem;
     }
   }
 `
+
+export const Avatar = styled.img`
+  display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: ${props => props.theme["gray900"]};
+    border-radius: 999px;
+    border: 2px solid ${props => props.theme["yellow500"]};
+    width: 120px;
+    height: 120px;
+  `

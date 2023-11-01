@@ -6,12 +6,11 @@ import { ContentHeader, Header, Avatar } from "./styles";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoCreateOutline } from "react-icons/io5";
 import { CardSingleFriend } from "../../components/CardSingleFriend";
-
 import { ModalUpdateFriend } from "../../components/ModalUpdate";
 
 export function Contact() {
   const [openModal, setOpenModal] = useState(false);
-  const { state } = useLocation();
+  const { state: data } = useLocation();
 
   return (
     <>
@@ -30,25 +29,23 @@ export function Contact() {
           </div>
 
           <div>
-            <Avatar>
-              avatar
-            </Avatar>
+            <Avatar src={data.avatar_url} />
 
-            <h1>{state.name}</h1>
+            <h1>{data.name}</h1>
 
             <span>
-              {state.phone}
+              + {data.phone_code} {data.phone}
             </span>
           </div>
         </ContentHeader>
       </Header>
 
-      <CardSingleFriend data={state} />
+      <CardSingleFriend data={data} />
 
       <ModalUpdateFriend
+        data={data}
         openModal={openModal}
         setOpenModal={setOpenModal}
-        data={state}
       />
     </>
   )

@@ -50,7 +50,7 @@ export const ContentHeader = styled.div`
   }
   `
 
-export const Avatar = styled.div`
+export const Avatar = styled.img`
   display: flex;
     justify-content: center;
     align-items: center;

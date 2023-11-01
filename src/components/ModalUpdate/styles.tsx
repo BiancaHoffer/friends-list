@@ -4,7 +4,7 @@ interface props {
   closeModal?: boolean;
 }
 
-export const Container = styled.button<props>`
+export const Opacity = styled.div<props>`
   position: fixed;
   top:0;
 
@@ -19,69 +19,90 @@ export const Container = styled.button<props>`
 `;
 
 export const ContainerModal = styled.div`
- // position: absolute;
   background-color: ${props => props.theme["gray800"]};
-  padding: 40px;
-  border-radius: 16px;
+  padding: 32px;
+  border-radius: 8px;
   width: 900px;
   margin: 12px;
   cursor: auto;
 
   z-index: 10;
 
-  & > div:nth-child(1) {
+  #title-buttonclose {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    color: ${props => props.theme["white"]};
-    font-weight: 600;
-    font-size: 1.2rem;
+    margin-bottom: 32px;
 
-    > button {
+    & > button {
       background-color: transparent;
       border: none;
-      padding: 20px;
-      font-size: 28px;
-      color: ${props => props.theme["white"]};
+      font-size: 32px;
+      color: white;
 
-      transition: all 0.3s ease-out;
+      transition: color 0.3s;
 
       &:hover {
-        color: ${props => props.theme["yellow500"]};
-      }
+        color: ${props => props.theme["yellow500"]}
+      } 
+    }
+
+    & > h2 {
+      font-size: 18px;
     }
   }
 
-    form {
+  form {
       display: flex;
       flex-direction: column;
+      gap: 16px
+    } 
 
-      p {
-        text-align: start;
-        color: ${props => props.theme["gray500"]};
-        font-size: 1.1rem;
-        margin-bottom: 8px;
-      }
-
-      p:nth-child(2) {
-        margin-top: 20px;
-      }
-
-      & > div {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-
-        @media(max-width: 768px) {
-         grid-template-columns: 1fr;
-        }
-      }
-
-      & > span {
-        margin-top: 40px;
-        display: flex;
-        gap: 16px;
-      }
+  #name-email, #image-phone, #country-city, #buttons {
+    display: flex;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px
   }
+
+  #buttons {
+    margin-top: 18px;
+  }
+  
 `;
+
+export const InputImage = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
+  cursor: pointer;
+  border-radius: 16px;
+ 
+  padding-right: 16px;
+  width: 97%;
+  background-color: ${props => props.theme["gray900"]};
+  border: 1px solid transparent;
+
+  transition: all 0.3s;
+
+  &:hover {
+    border: 1px solid ${props => props.theme["yellow500"]};
+  }
+
+  & > input {
+    width: 100%;
+    cursor: pointer;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+     background-color: ${props => props.theme["gray800"]};
+     padding: 8px 16px;
+     height: 100%;
+     border-radius: 16px 0px 0px 16px;
+  }
+`

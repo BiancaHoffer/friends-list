@@ -2,12 +2,11 @@ import {
   ReactNode,
   createContext,
   useContext,
-  useEffect,
   useState,
 } from 'react';
 
 import { gql } from 'graphql-tag';
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -64,7 +63,7 @@ const QUERY_CITIES = gql`
 export const GeoContext = createContext({} as AuthContextProps);
 
 export function GeoProvider({ children }: AuthProviderProps) {
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState("PT");
 
   const { data } = useQuery(QUERY_COUNTRIES);
   const { data: dataCities } = useQuery(QUERY_CITIES, {
@@ -86,8 +85,6 @@ export function GeoProvider({ children }: AuthProviderProps) {
       name: citie.node.name,
     }
   }) as CountryData[];
-
-  console.log(queryCities)
 
   return (
     <GeoContext.Provider value={{

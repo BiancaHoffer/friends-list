@@ -8,26 +8,15 @@ import { ContentHeader, Header } from "./styles";
 import { IoIosAdd, IoIosSearch } from "react-icons/io";
 import { ModalAddFriend } from "../../components/ModalAddFriend";
 
-//import { gql } from 'graphql-tag';
-//import { useQuery } from "@apollo/client";
-
 import { DataForm, useContact } from "../../Context/ContactContext";
-
-import { InputSelect } from "../../components/InputSelected";
-import { InputPhone } from "../../components/InputPhone";
-
 
 export function Home() {
   const [openModal, setOpenModal] = useState(false);
 
   const { listContacts } = useContact();
 
-
   return (
     <>
-      <InputSelect title="país *" />
-      <InputPhone placeholder="Telefone *" />
-
       <Header>
         <ContentHeader>
           <div>

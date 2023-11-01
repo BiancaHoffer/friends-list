@@ -59,21 +59,21 @@ export function InputSelectCities({ title, ...props }: InputSelectProps) {
 
       <Option isSelected={isSelected}>
         <div id="options-content">
-          {queryCities?.map((city) => {
+          {queryCities?.map((country) => {
             return (
-              <div key={city.id}>
+              <div key={country.id}>
                 <input
                   type="radio"
                   name="item"
-                  value={city.name}
+                  value={country.name}
                   onChange={(e) => setItemSeleted(e.target.value)}
                   onClick={handleSelect}
                 />
 
-                {city.name}
+                {country.name}
 
                 <div className="text-primary">
-                  {itemSeleted === city.name && <IoMdCheckmark />}
+                  {itemSeleted === country.name && <IoMdCheckmark />}
                 </div>
               </div>
             )

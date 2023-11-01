@@ -6,9 +6,6 @@ import {
   useState,
 } from 'react';
 
-import { gql } from 'graphql-tag';
-import { useQuery } from "@apollo/client";
-
 interface AuthProviderProps {
   children: ReactNode;
 }
@@ -17,7 +14,6 @@ interface AuthContextProps {
   addContact: (data: DataForm) => void;
   removeContact: (id: string) => void;
   updateContact: (data: DataForm) => void;
-  queryCountries: CountryData[];
   listContacts: DataForm[];
 }
 
@@ -28,30 +24,9 @@ export interface DataForm {
   phone: string;
   iso2?: string;
   phone_code?: string;
+  country?: string;
+  avatar_url?: string;
 }
-
-
-export interface CountryData {
-  id: number;
-  name: string;
-  phone_code: string;
-  iso2: string;
-}
-
-const QUERY_COUNTRIES = gql`
-  query {
-  countries (page: {first: 4}) {
-    totalCount
-    edges {
-      node {
-        id
-        name
-        iso2
-        phone_code
-      }
-    }
-  }
-}`
 
 export const ContactContext = createContext({} as AuthContextProps);
 
@@ -65,18 +40,6 @@ export function ContactProvider({ children }: AuthProviderProps) {
 
     return [];
   });
-
-  const { data } = useQuery(QUERY_COUNTRIES);
-
-  const queryCountries = data?.countries.edges.map((codePhone: any) => {
-    return {
-      id: codePhone.node.id,
-      phone_code: codePhone.node.phone_code,
-      iso2: codePhone.node.iso2.toLowerCase(),
-      name: codePhone.node.name,
-    }
-  }) as CountryData[];
-
 
   useEffect(() => {
     localStorage.setItem("@biancamacedo", JSON.stringify(listContacts));
@@ -102,7 +65,6 @@ export function ContactProvider({ children }: AuthProviderProps) {
       listContacts,
       updateContact,
       removeContact,
-      queryCountries
     }}>
       {children}
     </ContactContext.Provider>

@@ -1,4 +1,4 @@
-import { useState, ComponentProps } from "react";
+import { useState, ComponentProps, useEffect } from "react";
 
 import {
   IoIosArrowDown,
@@ -18,11 +18,12 @@ import { CountryData, useGeo } from "../../Context/GeoContext";
 
 interface InputProps extends ComponentProps<'input'> {
   setCodePhone?: any;
+  setIso2?: any;
 };
 
-export function InputPhone({ setCodePhone, ...props }: InputProps) {
+export function InputPhone({ setCodePhone, setIso2, ...props }: InputProps) {
   const [isSelected, setisSelected] = useState(false);
-  const [itemSeleted, setItemSeleted] = useState("");
+  const [itemSeleted, setItemSeleted] = useState("351");
   const [flag, setFlag] = useState("https://flagcdn.com/pt.svg");
 
   const { queryCountries } = useGeo();
@@ -31,6 +32,19 @@ export function InputPhone({ setCodePhone, ...props }: InputProps) {
     setisSelected(false);
     setFlag(`https://flagcdn.com/${country.iso2}.svg`)
   }
+
+  useEffect(() => {
+    function teste() {
+      setIso2(flag)
+      setCodePhone(itemSeleted);
+    }
+
+    teste();
+  }, [handleSelect])
+
+  setIso2(flag);
+  setCodePhone(itemSeleted);
+
   return (
     <Container isSelected={isSelected}>
       <div>

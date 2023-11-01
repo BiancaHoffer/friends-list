@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
 
-import { DataContact, useContact } from "../../Context/ContactContext";
+import { DataForm, useContact } from "../../Context/ContactContext";
 
 import { Button } from "../Button";
 import { Container } from "./styles";
 
-import { IoMailOutline } from "react-icons/io5"
+import { IoMailOutline, IoEarthOutline } from "react-icons/io5"
 
 interface CardProps {
-  data: DataContact
+  data: DataForm;
 }
 
 export function CardSingleFriend({ data }: CardProps) {
@@ -22,12 +22,18 @@ export function CardSingleFriend({ data }: CardProps) {
 
   return (
     <Container>
-      <div>
-        <div>
+      <div id="item">
+        <div id="icon">
           <IoMailOutline />
         </div>
+        E-mail: {data.email}
+      </div>
 
-        {data.email}
+      <div id="item">
+        <div id="icon">
+          <IoEarthOutline />
+        </div>
+        País: {data.country}
       </div>
 
       <div>

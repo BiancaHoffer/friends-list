@@ -1,29 +1,39 @@
-import { ComponentProps, useState } from "react";
+import { ComponentProps, useState, useEffect } from "react";
 
 import { IoIosArrowDown, IoIosArrowUp, IoMdCheckmark } from "react-icons/io";
 
 import { Container, Select, Option } from "./styles";
 
 import { useGeo } from "../../Context/GeoContext";
-import { CountryData } from "../../Context/ContactContext";
+import { CountryData } from "../../Context/GeoContext";
 
 
 interface InputSelectProps extends ComponentProps<'input'> {
   title?: string;
+  setSelected: any;
 }
 
-export function InputSelect({ title, ...props }: InputSelectProps) {
+export function InputSelect({ title, setSelected, ...props }: InputSelectProps) {
   const [isSelected, setisSelected] = useState(false);
   const [itemSeleted, setItemSeleted] = useState(`Selecionar ${title}`);
+  const [iso, setIso] = useState("");
 
   const { queryCountries, filter, setFilter } = useGeo();
 
   function handleSelect(country: CountryData) {
     setisSelected(false);
-    const teste = country
-    //@ts-ignore
-    setFilter(country.iso2)
+    setIso(country.iso2)
   }
+
+  useEffect(() => {
+    function updateState() {
+      setSelected(itemSeleted);
+      //@ts-ignore
+      setFilter(iso);
+    }
+
+    updateState()
+  }, [handleSelect])
 
   return (
     <Container>
