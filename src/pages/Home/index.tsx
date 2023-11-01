@@ -11,7 +11,7 @@ import { ModalAddFriend } from "../../components/ModalAddFriend";
 //import { gql } from 'graphql-tag';
 //import { useQuery } from "@apollo/client";
 
-import { DataContact, useContact } from "../../Context/ContactContext";
+import { DataForm, useContact } from "../../Context/ContactContext";
 
 import { InputSelect } from "../../components/InputSelected";
 import { InputPhone } from "../../components/InputPhone";
@@ -50,7 +50,7 @@ export function Home() {
       </Header>
 
 
-      {listContacts.map((data: DataContact) => {
+      {listContacts.map((data: DataForm) => {
         return (
           <CardFriend key={data.id} data={data} />
         )

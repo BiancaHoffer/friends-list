@@ -13,48 +13,27 @@ import {
   Input
 } from "./styles";
 
-interface CountryData {
-  id: number;
-  name: string;
-  phone_code: string;
-  emoji: string;
-}
+import { CountryData, useGeo } from "../../Context/GeoContext";
 
-const countries = [{
-  id: 200,
-  name: "Singapore",
-  phone_code: "65",
-  emoji: "ph",
-}, {
-  id: 222,
-  name: "Thailand",
-  phone_code: "66",
-  emoji: "br",
-}, {
-  id: 224,
-  name: "Alabama",
-  phone_code: "11",
-  emoji: "br",
-}]
 
 interface InputProps extends ComponentProps<'input'> {
-
+  setCodePhone?: any;
 };
 
-export function InputPhone({ ...props }: InputProps) {
+export function InputPhone({ setCodePhone, ...props }: InputProps) {
   const [isSelected, setisSelected] = useState(false);
   const [itemSeleted, setItemSeleted] = useState("");
-  const [flag, setFlag] = useState("https://flagcdn.com/pt.svg")
+  const [flag, setFlag] = useState("https://flagcdn.com/pt.svg");
+
+  const { queryCountries } = useGeo();
 
   function handleSelect(country: CountryData) {
     setisSelected(false);
-    setFlag(`https://flagcdn.com/${country.emoji}.svg`)
+    setFlag(`https://flagcdn.com/${country.iso2}.svg`)
   }
   return (
     <Container isSelected={isSelected}>
       <div>
-
-
         <Select isSelected={isSelected}>
           <input
             type="checkbox"
@@ -77,7 +56,7 @@ export function InputPhone({ ...props }: InputProps) {
 
         <Option isSelected={isSelected}>
           <div id="options-content">
-            {countries.map((country) => {
+            {queryCountries?.map((country: CountryData) => {
               return (
                 <div key={country.id}>
                   <input
@@ -90,9 +69,9 @@ export function InputPhone({ ...props }: InputProps) {
 
                   <div id="item">
                     <img
-                      src={`https://flagcdn.com/${country.emoji}.svg`}
+                      src={`https://flagcdn.com/${country.iso2}.svg`}
                       width="30"
-                      alt="Ukraine"
+                      alt={country.name}
                     />
 
                     (+ {country.phone_code})

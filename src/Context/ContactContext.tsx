@@ -14,26 +14,49 @@ interface AuthProviderProps {
 }
 
 interface AuthContextProps {
-  addContact: (data: DataContact) => void;
+  addContact: (data: DataForm) => void;
   removeContact: (id: string) => void;
-  updateContact: (data: DataContact) => void;
-  getCountries: any[];
-  listContacts: DataContact[];
+  updateContact: (data: DataForm) => void;
+  queryCountries: CountryData[];
+  listContacts: DataForm[];
 }
 
-export interface DataContact {
+export interface DataForm {
   id?: string;
   name: string;
   email: string;
   phone: string;
   iso2?: string;
-  codePhone?: string;
+  phone_code?: string;
 }
+
+
+export interface CountryData {
+  id: number;
+  name: string;
+  phone_code: string;
+  iso2: string;
+}
+
+const QUERY_COUNTRIES = gql`
+  query {
+  countries (page: {first: 4}) {
+    totalCount
+    edges {
+      node {
+        id
+        name
+        iso2
+        phone_code
+      }
+    }
+  }
+}`
 
 export const ContactContext = createContext({} as AuthContextProps);
 
 export function ContactProvider({ children }: AuthProviderProps) {
-  const [listContacts, setListContacts] = useState<DataContact[]>(() => {
+  const [listContacts, setListContacts] = useState<DataForm[]>(() => {
     const storage = localStorage.getItem('@biancamacedo');
 
     if (storage) {
@@ -43,24 +66,28 @@ export function ContactProvider({ children }: AuthProviderProps) {
     return [];
   });
 
-  //const { data: countries, loading } = useQuery(GET_COUNTRIES);
+  const { data } = useQuery(QUERY_COUNTRIES);
 
-  const [getCountries, setGetCountries] = useState<any>();
+  const queryCountries = data?.countries.edges.map((codePhone: any) => {
+    return {
+      id: codePhone.node.id,
+      phone_code: codePhone.node.phone_code,
+      iso2: codePhone.node.iso2.toLowerCase(),
+      name: codePhone.node.name,
+    }
+  }) as CountryData[];
+
 
   useEffect(() => {
     localStorage.setItem("@biancamacedo", JSON.stringify(listContacts));
-
-    if (listContacts.length === 0) {
-      alert("Nenhum amigo encontrado")
-    }
   }, [listContacts]);
 
 
-  function addContact(data: DataContact) {
+  function addContact(data: DataForm) {
     setListContacts((prevList) => [...prevList, data]);
   };
 
-  function updateContact(data: DataContact) {
+  function updateContact(data: DataForm) {
     setListContacts((prevList) => prevList.filter((contact) => contact.id !== data.id));
     setListContacts((prevList) => [...prevList, data]);
   };
@@ -75,7 +102,7 @@ export function ContactProvider({ children }: AuthProviderProps) {
       listContacts,
       updateContact,
       removeContact,
-      getCountries,
+      queryCountries
     }}>
       {children}
     </ContactContext.Provider>

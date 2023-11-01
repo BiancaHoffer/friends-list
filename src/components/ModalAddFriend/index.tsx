@@ -9,6 +9,7 @@ import { Button } from "../Button";
 import { InputPhone } from "../InputPhone";
 import { useContact } from "../../Context/ContactContext";
 import { InputSelect } from "../InputSelected";
+import { InputSelectCities } from "../InputSelectedCities";
 
 interface ModalAddFriendProps {
   openModal: boolean;
@@ -70,13 +71,13 @@ export function ModalAddFriend({ openModal, setOpenModal }: ModalAddFriendProps)
           </div>
 
           <div id="image-phone">
-            <InputPhone placeholder="Telefone *" type="tel" required />
+            <InputPhone placeholder="Telefone *" type="tel" setCodePhone={setCodePhone} required />
             <Input placeholder="imagem" />
           </div>
 
           <div id="country-city">
             <InputSelect title="país *" required />
-            <InputSelect title="sitio *" required />
+            <InputSelectCities title="sitio *" required />
           </div>
 
           <div id="buttons">

@@ -9,17 +9,20 @@ import { ApolloProvider } from '@apollo/client';
 import client from './lib/apollo';
 
 import { ContactProvider } from './Context/ContactContext';
+import { GeoProvider } from './Context/GeoContext';
 
 export function App() {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
-        <ContactProvider>
-          <ThemeProvider theme={defaultTheme}>
-            <Router />
-            <GlobalStyle />
-          </ThemeProvider>
-        </ContactProvider>
+        <GeoProvider>
+          <ContactProvider>
+            <ThemeProvider theme={defaultTheme}>
+              <Router />
+              <GlobalStyle />
+            </ThemeProvider>
+          </ContactProvider>
+        </GeoProvider>
       </BrowserRouter>
     </ApolloProvider>
   )
